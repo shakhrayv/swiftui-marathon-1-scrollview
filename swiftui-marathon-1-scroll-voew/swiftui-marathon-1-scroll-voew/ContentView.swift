@@ -8,28 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    let rectangleSize: CGFloat = 50
+    
     var body: some View {
         TabView {
-            VStack(alignment: .leading, spacing: 0.0) {
-                ScrollView {
-                    VStack(alignment: .leading) {
-                        ForEach(Array(0...100), id: \.self) { index in
-                            HStack {
-                                Text("\(index)")
-                                Spacer()
-                            }
+            ScrollView {
+                LazyVStack(alignment: .leading) {
+                    ForEach(Array(0...100), id: \.self) { index in
+                        HStack {
+                            Text("\(index)")
+                            Spacer()
                         }
                     }
                 }
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
                 Rectangle()
                     .fill(.red)
-                    .frame(height: 50)
+                    .frame(height: 50.0)
+                    .opacity(0.5)
             }
-            
             .tabItem { Label("Tab 1", systemImage: "star.fill") }
         }
+
     }
 }
+
 
 #Preview {
     ContentView()
